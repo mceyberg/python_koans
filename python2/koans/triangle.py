@@ -18,8 +18,26 @@
 #   about_triangle_project_2.py
 #
 def triangle(a, b, c):
-    # DELETE 'PASS' AND WRITE THIS CODE
-    pass
+    map(not_zero_or_less, [a, b, c])
+
+    if a > b + c:
+        raise TriangleError
+    if b > a + c:
+        raise TriangleError
+    if c > a + b:
+        raise TriangleError
+
+    if a == b == c:
+        return 'equilateral'
+    if a == b or b == c or a == c:
+        return 'isosceles'
+    else:
+        return 'scalene'
+
+
+def not_zero_or_less(x):
+    if x <= 0:
+        raise TriangleError
 
 
 # Error class used in part 2.  No need to change this code.
