@@ -34,8 +34,26 @@ from runner.koan import *
 # Your goal is to write the score method.
 
 def score(dice):
-    # You need to write this method
-    pass
+    from collections import Counter
+
+    dice_count = Counter(dice).items()
+
+    total = 0
+
+    # If dice contains three 1's, add 1000 to the total score. Otherwise, add 100 * the die value.
+    triple_value = lambda x: 1000 if x == 1 else x * 100
+
+    # If dice contains three identical values, add their total to the score and remove them from the list
+    for die_number, die_frequency in dice_count:
+        if die_frequency >= 3:
+            total += triple_value(die_number)
+            die_frequency %= 3
+        if die_number == 1:
+            total += 100 * die_frequency
+        elif die_number == 5:
+            total += 50 * die_frequency
+
+    return total
 
 
 class AboutScoringProject(Koan):
